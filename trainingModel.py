@@ -22,5 +22,5 @@ class trainModel:
 # for each cluster run a loop
     # drop cluster column
     # split the data
-    # train appropriate model for each cluster
+    # train each cluster by searching for the best model 
     # save the model
