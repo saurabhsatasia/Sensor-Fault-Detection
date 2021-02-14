@@ -16,14 +16,14 @@ class KMeansClustering:
                 kmeans=KMeans(n_clusters=i, init='k-means++', random_state=42)
                 kmeans.fit(data)
                 wcss.append(kmeans.inertia_)
-                plt.plot(range(2,11), wcss)
-                plt.title('The Elbow Method')
-                plt.xlabel('Number of CLusters')
-                plt.ylabel('WCSS')
-                plt.savefig('preprocessing_data/K-Means_Elbow.PNG')
-                self.kn = KneeLocator(range(2,11), wcss, curve='convex', direction='decreasing')
-                self.logger_object.log(self.file_object, f'The optimum number of cluster is : {str(self.kn.knee)}. Exited the elbow_plot method of KMeansClustering class')
-                return self.kn.knee
+            plt.plot(range(2,11), wcss)
+            plt.title('The Elbow Method')
+            plt.xlabel('Number of CLusters')
+            plt.ylabel('WCSS')
+            plt.savefig('preprocessing_data/K-Means_Elbow.PNG')
+            self.kn = KneeLocator(range(2,11), wcss, curve='convex', direction='decreasing')
+            self.logger_object.log(self.file_object, f'The optimum number of cluster is : {str(self.kn.knee)}. Exited the elbow_plot method of KMeansClustering class')
+            return self.kn.knee
         except Exception as e:
             self.logger_object.log(self.file_object, f'Exception occured in elbow_plot method of the KMeansClustering class. Exception message: {str(e)} ')
             self.logger_object.log(self.file_object, 'Finding the number of clusters failed. Exited the elbow_plot method of the KMeansClustering class')
