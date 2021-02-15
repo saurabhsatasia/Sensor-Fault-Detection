@@ -82,20 +82,3 @@ class trainModel:
             self.log_writer.log(self.file_object, 'Unsuccessful End of Training')
             self.file_object.close()
             raise Exception
-
-# load the data
-# preprocess the data
-# separate target variable
-# impute missing values
-# check further which columns do not contribute to predictions
-# if the standard deviation for a column is zero, it means that the column has constant values
-# and they are giving the same output both for good and bad sensors
-# prepare the list of such columns to drop
-# CUSTOMIZED MACHINE LEARNING APPROACH
-# cluster the data
-# create new columns for cluster label
-# for each cluster run a loop
-    # drop cluster column
-    # split the data
-    # train each cluster by searching for the best model
-    # save the model
