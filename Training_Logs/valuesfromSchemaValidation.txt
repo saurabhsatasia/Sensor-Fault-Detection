@@ -1,0 +1,4 @@
+2021-02-20/02:26:32		LengthOfDateStampInFile::8  LengthOfTimeStampInFile::6  NumberofColumns::592 
+
+2021-02-20/03:09:11		LengthOfDateStampInFile::8  LengthOfTimeStampInFile::6  NumberofColumns::592 
+
