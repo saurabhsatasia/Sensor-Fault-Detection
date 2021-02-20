@@ -57,7 +57,7 @@ class trainModel:
 
             """parsing all the clusters and looking for the best ML algorithm to fit on individual cluster"""
             for i in list_of_clusters:
-                cluster_data = X[X['CLuster']==i] # filter the data for one cluster
+                cluster_data = X[X['Cluster']==i] # filter the data for one cluster
 
                 # Prepare the feature and Label columns:
                 cluster_features = cluster_data.drop(['Labels', 'Cluster'], axis=1)
@@ -74,9 +74,9 @@ class trainModel:
                 file_op = file_methods.File_Operation(self.file_object, self.log_writer)
                 save_model = file_op.save_model(best_model, best_model_name+str(i))
 
-                # logging the Successfull Training
-                self.log_writer.log(self.file_object, "Successfull End of Training")
-                self.file_object.close()
+            # logging the Successfull Training
+            self.log_writer.log(self.file_object, "Successfull End of Training")
+            self.file_object.close()
         except Exception:
             # logging the unsuccessful Training
             self.log_writer.log(self.file_object, 'Unsuccessful End of Training')

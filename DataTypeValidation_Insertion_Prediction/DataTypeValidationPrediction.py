@@ -58,7 +58,7 @@ class dBOperation:
             file = open("Prediction_Logs/DbTableCreateLog.txt", 'a+')
             self.logger.log(file, "Error while creating table: %s " % e)
             file.close()
-            conn.close()
+            # conn.close()
             file = open("Prediction_Logs/DataBaseConnectionLog.txt", 'a+')
             self.logger.log(file, "Closed %s database successfully" % DatabaseName)
             file.close()

@@ -73,41 +73,41 @@ def printstring():
 @cross_origin()
 def trainRouteClient():
 
-    try:
+    # try:
         # if request.json['folderPath'] is not None:
             # path = request.json['folderPath']
-        path = 'Training_Batch_Files'
-        train_valObj = train_validation(path) #object initialization
+    path = 'Training_Batch_Files' # to test it locally
+    train_valObj = train_validation(path) #object initialization
 
-        train_valObj.train_validation()#calling the training_validation function
-
-
-        trainModelObj = trainModel() #object initialization
-        trainModelObj.trainingModel() #training the model for the files in the table
+    train_valObj.train_validation()#calling the training_validation function
 
 
-    except ValueError:
+    trainModelObj = trainModel() #object initialization
+    trainModelObj.trainingModel() #training the model for the files in the table
 
-        return Response("Error Occurred! %s" % ValueError)
 
-    except KeyError:
+    # except ValueError:
+    #
+    #     return Response("Error Occurred! %s" % ValueError)
+    #
+    # except KeyError:
+    #
+    #     return Response("Error Occurred! %s" % KeyError)
 
-        return Response("Error Occurred! %s" % KeyError)
-
-    except Exception as e:
-
-        return Response("Error Occurred! %s" % e)
+    # except Exception as e:
+    #
+    #     return Response("Error Occurred! %s" % e)
     return Response("Training successfull!!")
 
 
 
-@app.route("/mymethod", methods=['POST'])
-@cross_origin()
-def addition():
-    name = request.json['name']
-    request.json['phonenum']
-    request.json['mailid']
-    return Response(name)
+# @app.route("/mymethod", methods=['POST'])
+# @cross_origin()
+# def addition():
+#     name = request.json['name']
+#     request.json['phonenum']
+#     request.json['mailid']
+#     return Response(name)
 
 
 

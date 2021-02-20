@@ -38,12 +38,16 @@ class dbOperation:
                 file.close()
             else:
                 for key in column_names.keys():
-                    type=column_names[key]
+                    type = column_names[key]
+
+                    # in try block we check if the table exists, if yes then add columns to the table
+                    # else in catch block we will create the table
                     try:
-                        conn.execute(f'ALTER TABLE Good_Raw_Data ADD COLUMN "{key}" {type}')
-                        conn.close()
+                        # cur = cur.execute("SELECT name FROM {dbName} WHERE type='table' AND name='Good_Raw_Data'".format(dbName=DatabaseName))
+                        conn.execute('ALTER TABLE Good_Raw_Data ADD COLUMN "{column_name}" {dataType}'.format(column_name=key, dataType=type))
                     except:
-                        conn.execute(f'CREATE TABLE  Good_Raw_Data ({key} {type})') # key=column_name , type=DataType
+                        conn.execute('CREATE TABLE  Good_Raw_Data ({column_name} {dataType})'.format(column_name=key, dataType=type))
+
                 conn.close()
                 file = open("Training_Logs/DbTableCreateLog.txt", 'a+')
                 self.logger.log(file, "Tables created successfullly!!")
@@ -55,7 +59,7 @@ class dbOperation:
             file = open("Training_Logs/DbTableCreateLog.txt", 'a+')
             self.logger.log(file, f"Error while creating table: {e}")
             file.close()
-            conn.close()
+            # conn.close()
             file = open("Training_Logs/DataBaseConnectionLog.txt", 'a+')
             self.logger.log(file, f"Closed {DatabaseName} database successfully")
             file.close()
@@ -66,7 +70,7 @@ class dbOperation:
         goodFilePath = self.goodFilePath
         badFilePath = self.badFilePath
         onlyfiles = [f for f in listdir(goodFilePath)]
-        log_file = open("Training_Logs.txt", 'a+')
+        log_file = open("Training_Logs/DbInsertLog.txt", 'a+')
 
         for file in onlyfiles:
             try:
@@ -98,7 +102,7 @@ class dbOperation:
         log_file = open("Training_Logs/ExportToCsv.txt", 'a+')
         try:
             conn = self.dataBaseConnection(Database)
-            sqlSelect = "SELECT * FROM Good_Rae_Data"
+            sqlSelect = "SELECT * FROM Good_Raw_Data"
             cursor = conn.cursor()
 
             cursor.execute(sqlSelect)
