@@ -28,7 +28,8 @@ def home():
 def predictRouteClient():
     try:
         if request.json is not None:
-            path = request.json['filepath']
+        #     path = request.json['filepath']
+            path='Prediction_Batch_files'
 
             pred_val = pred_validation(path) #object initialization
 
@@ -38,7 +39,7 @@ def predictRouteClient():
 
             # predicting for dataset present in database
             path,json_predictions = pred.predictionFromModel()
-            return Response("Prediction File created at !!!"  +str(path) +'and few of the predictions are '+str(json.loads(json_predictions) ))
+            return Response("Prediction File created at !!!"  +str(path)+'*** and few of the predictions are '+str(json.loads(json_predictions) ))
         elif request.form is not None:
             path = request.form['filepath']
 
@@ -50,7 +51,7 @@ def predictRouteClient():
 
             # predicting for dataset present in database
             path,json_predictions = pred.predictionFromModel()
-            return Response("Prediction File created at !!!"  +str(path) +'and few of the predictions are '+str(json.loads(json_predictions) ))
+            return Response("Prediction File created at !!!" +str(path)+'** and few of the predictions are '+str(json.loads(json_predictions) ))
         else:
             print('Nothing Matched')
     except ValueError:
@@ -73,30 +74,30 @@ def printstring():
 @cross_origin()
 def trainRouteClient():
 
-    # try:
+    try:
         # if request.json['folderPath'] is not None:
             # path = request.json['folderPath']
-    path = 'Training_Batch_Files' # to test it locally
-    train_valObj = train_validation(path) #object initialization
+        path = 'Training_Batch_Files' # to test it locally
+        train_valObj = train_validation(path) #object initialization
 
-    train_valObj.train_validation()#calling the training_validation function
-
-
-    trainModelObj = trainModel() #object initialization
-    trainModelObj.trainingModel() #training the model for the files in the table
+        train_valObj.train_validation()#calling the training_validation function
 
 
-    # except ValueError:
-    #
-    #     return Response("Error Occurred! %s" % ValueError)
-    #
-    # except KeyError:
-    #
-    #     return Response("Error Occurred! %s" % KeyError)
+        trainModelObj = trainModel() #object initialization
+        trainModelObj.trainingModel() #training the model for the files in the table
 
-    # except Exception as e:
-    #
-    #     return Response("Error Occurred! %s" % e)
+
+    except ValueError:
+
+        return Response("Error Occurred! %s" % ValueError)
+
+    except KeyError:
+
+        return Response("Error Occurred! %s" % KeyError)
+
+    except Exception as e:
+
+        return Response("Error Occurred! %s" % e)
     return Response("Training successfull!!")
 
 
